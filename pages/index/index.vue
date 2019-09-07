@@ -1,9 +1,12 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+	<view>
+		
+		<navigator url="../test/test">
+			<view>
+				糗事
+			</view>
+		</navigator>
+		
 	</view>
 </template>
 
