@@ -3,10 +3,46 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"app-plus":{
+					"scrollIndicator":"none",
+					"titleNView":{
+						"backgroundColor":"#FFFFFF",
+						"searchInput":{
+							"align":"center",
+							"backgroundColor":"#F7F7F7",
+							"borderRadius":"10px",
+							"placeholder":"搜索糗事",
+							"placeholderColor":"#CCCCCC",
+							"disabled":true
+						},
+						"buttons":[
+							//左边签到按钮
+							{
+								"color":"#FEE42A",
+								"colorPressed":"#BBBBBB",
+								"fontSize":"50rpx",
+								"float":"left",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue606"
+							},
+							//右边编辑按钮
+							{
+								"color":"#000000",
+								"colorPressed":"#BBBBBB",
+								"fontSize":"50rpx",
+								"float":"right",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue60d"
+							}
+						]
+					}
+				},
+				"h5":{
+					
+				}
 			}
 		}
-	    
         ,{
             "path" : "pages/news/news",
             "style" : {
