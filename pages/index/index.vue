@@ -2,64 +2,75 @@
 	<view>
 		
 		<!--图文条目-->
-		<view class="index-list">
-			<!--第一行 头像 昵称 关注-->
-			<view class="index-list1">
-				<view>
-					<image src="../../static/demo/userpic/12.jpg" mode="widthFix" lazy-load></image>
-					昵称
-				</view>
-				<view>+关注</view>
-			</view>
-			<!--第二行标题-->
-			<view class="index-list2">
-				标题
-			</view>
-			<!--第三行 大图-->
-			<view class="index-list3 uni-flex">
-				<!--图片-->
-				<image src="../../static/demo/banner1.jpg" mode="widthFix" lazy-load></image>
-				<!-- 视频 -->
-				<view class="index-list-play icon iconfont icon-bofang"></view>
-				<view class="index-list-play-info">100万次播放 2:50</view>
-			</view>
-			<!--第四行 赞 踩 评论 转发 -->
-			<view class="index-list4">
-				<view>
-					<!-- 赞 -->
-					<view>
-						<view class="icon iconfont icon-icon_xiaolian-mian"></view>
-						<view>10</view>
-					</view>
-					<!-- 踩 -->
-					<view>
-						<view class="icon iconfont icon-kulian"></view>
-						<view>23</view>
-					</view>
-				</view>
-				<view>
-					<!-- 评论 -->
-					<view>
-						<view class="icon iconfont icon-pinglun1"></view>
-						<view>10</view>
-					</view>
-					<!-- 转发 -->
-					<view>
-						<view class="icon iconfont icon-zhuanfa"></view>
-						<view>23</view>
-					</view>
-				</view>
-			</view>
-		</view>
+		<block v-for="(item,index) in list" v-bind:key="index">
+			<index-list v-bind:item="item" v-bind:index="index"></index-list>
+		</block>
 		
 	</view>
 </template>
 
 <script>
+	// 引入子组件
+	import indexList from "../../components/index/index-list.vue";
 	export default {
+		components:{
+			indexList
+		},
 		data() {
 			return {
-				title: 'Hello'
+				list:[
+					{
+						userpic:"../../static/demo/userpic/12.jpg",
+						username:"昵称",
+						isguanzhu:false,
+						title:"标题",
+						type:"img",//img 图文 video 视频
+						titlepic:"../../static/demo/banner1.jpg",
+						playnum:200000,
+						long:"2:47",
+						infonum:{
+							index:1, //0:没有顶,没有踩 1:顶  2:踩
+							dingnum:10,
+							cainum:10
+						},
+						commentnum:10,
+						sharenum:10
+					},
+					{
+						userpic:"../../static/demo/userpic/12.jpg",
+						username:"昵称",
+						isguanzhu:true,
+						title:"标题",
+						type:"video",//img 图文 video 视频
+						titlepic:"../../static/demo/banner1.jpg",
+						playnum:200000,
+						long:"2:47",
+						infonum:{
+							index:2, //0:没有顶,没有踩 1:顶  2:踩
+							dingnum:10,
+							cainum:10
+						},
+						commentnum:10,
+						sharenum:10
+					},
+					{
+						userpic:"../../static/demo/userpic/12.jpg",
+						username:"昵称",
+						isguanzhu:true,
+						title:"标题",
+						type:"video",//img 图文 video 视频
+						titlepic:"../../static/demo/banner1.jpg",
+						playnum:200000,
+						long:"2:47",
+						infonum:{
+							index:0, //0:没有顶,没有踩 1:顶  2:踩
+							dingnum:10,
+							cainum:10
+						},
+						commentnum:10,
+						sharenum:10
+					}
+				]
 			}
 		},
 		onLoad() {
@@ -72,87 +83,5 @@
 </script>
 
 <style>
-	.index-list{
-		padding: 30rpx 20rpx;
-		border-bottom: 2rpx solid #EFEFEF;
-	}
-	.index-list1{
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-	.index-list1>view:first-child {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		color: #999999;
-	}
-	.index-list1>view:first-child image{
-		width: 80rpx;
-		height: 80rpx !important;
-		border-radius: 100%;
-		margin-right: 20rpx;
-	}
-	.index-list1>view:last-child {
-		display: flex;
-		align-items: center;
-		background-color: #F4F4F4;
-		border-radius: 10rpx;
-		padding: 4rpx 10rpx;
-	}
-	.index-list2{
-		padding: 20rpx 10rpx;
-		font-size: 35rpx;
-	}
-	.index-list3{
-		position: relative;
-		justify-content: center;
-		align-items: center;
-	}
-	.index-list3>image{
-		width: 100%;
-		border-radius: 20rpx;
-	}
 	
-	.index-list3>.index-list-play{
-		position: absolute;
-		font-size: 130rpx;
-		color: #FFFFFF;
-	}
-	.index-list3>.index-list-play-info{
-		position: absolute;
-		background-color: rgba(51,51,51,0.72);
-		color: #FFFFFF;
-		font-size: 15rpx;
-		bottom: 10rpx;
-		right: 20rpx;
-		border-radius: 20rpx;
-		padding: 0 15rpx;
-	}
-	
-	.index-list4{
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 20rpx 0 10rpx 0;
-	}
-	.index-list4 view{
-		color: #CCCCCC;
-	}
-	.index-list4>view:first-child{
-		display: flex;
-		align-items: center;
-	}
-	.index-list4>view:last-child{
-		display: flex;
-		align-items: center;
-	}
-	.index-list4>view>view{
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.index-list4>view>view>view{
-		margin-left: 15rpx;
-	}
 </style>
