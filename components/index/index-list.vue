@@ -1,6 +1,6 @@
 <!-- 列表条目组件 -->
 <template>
-	<view class="index-list">
+	<view class="index-list animated bounceIn">
 		<!--第一行 头像 昵称 关注-->
 		<view class="index-list1">
 			<view>
@@ -8,18 +8,18 @@
 				{{item.username}}
 			</view>
 			<template v-if="item.isguanzhu">
-				<view>已关注</view>
+				<view  v-on:tap="guanzhu(item.isguanzhu)">已关注</view>
 			</template>
 			<template v-else>
-				<view>+关注</view>
+				<view v-on:tap="guanzhu(item.isguanzhu)">+关注</view>
 			</template>
 		</view>
 		<!--第二行标题-->
-		<view class="index-list2">
+		<view class="index-list2" v-on:click="toDetail()">
 			{{item.title}}
 		</view>
 		<!--第三行 大图-->
-		<view class="index-list3 uni-flex">
+		<view class="index-list3 uni-flex" v-on:click="toDetail()">
 			<!--图片-->
 			<image v-bind:src="item.titlepic" mode="widthFix" lazy-load></image>
 			<!-- 视频 -->
@@ -34,12 +34,12 @@
 			<view>
 				<!-- 赞 -->
 				<view v-bind:class="{'active':(item.infonum.index == 1)}">
-					<view class="icon iconfont icon-icon_xiaolian-mian"></view>
+					<view class="icon iconfont icon-icon_xiaolian-mian" v-on:tap="caoZuo('ding')"></view>
 					<view>{{item.infonum.dingnum}}</view>
 				</view>
 				<!-- 踩 -->
 				<view v-bind:class="{'active':(item.infonum.index == 2)}">
-					<view class="icon iconfont icon-kulian"></view>
+					<view class="icon iconfont icon-kulian" v-on:tap="caoZuo('cai')"></view>
 					<view>{{item.infonum.cainum}}</view>
 				</view>
 			</view>
@@ -64,6 +64,51 @@
 		props: {
 			item: Object,
 			index: Number
+		},
+		methods:{
+			guanzhu(isguanzhu){
+				if(isguanzhu){
+					uni.showToast({
+						title:"取消关注"
+					});
+				}else{
+					uni.showToast({
+						title:"关注成功"
+					});
+				}
+				//改变状态
+				this.item.isguanzhu = !this.item.isguanzhu;
+			},
+			caoZuo(type){
+				switch (type){
+					case 'ding':	//顶事件
+						if (this.item.infonum.index == 1) {return;}
+						//加上顶的个数
+						this.item.infonum.dingnum++;
+						if (this.item.infonum.index == 2) {
+							//减去踩的个数
+							this.item.infonum.cainum--;
+						}
+						//修改状态为ding
+						this.item.infonum.index = 1;
+						break;
+					case 'cai':		//踩事件
+						if(this.item.infonum.index == 2){return;}
+						//加上踩的个数
+						this.item.infonum.cainum++;
+						if (this.item.infonum.index == 1) {
+							//减去顶的个数
+							this.item.infonum.dingnum--;
+						}
+						//修改状态为踩
+						this.item.infonum.index = 2;
+						break;
+				}
+			},
+			toDetail(){
+				console.log("跳转到详情页");
+			}
+			
 		}
 	}
 </script>
