@@ -179,6 +179,12 @@
 				}
 			})
 		},
+		onNavigationBarSearchInputClicked() {
+			//跳转到搜索页面
+			uni.navigateTo({
+				url:"../search/search"
+			});
+		},
 		methods: {
 			tabClick(index){
 				//修改选中的位置
