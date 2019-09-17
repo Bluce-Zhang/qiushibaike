@@ -185,6 +185,18 @@
 				url:"../search/search"
 			});
 		},
+		onNavigationBarButtonTap(e) {	//标题栏上的按钮的点击事件
+			switch (e.index){
+				case 0:	//签到事件
+				
+					break;
+				case 1:	//发表按钮  跳转到发表界面
+					uni.navigateTo({
+						url:"../publish/publish"
+					});
+					break;
+			}
+		},
 		methods: {
 			tabClick(index){
 				//修改选中的位置
