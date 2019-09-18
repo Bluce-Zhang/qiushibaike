@@ -12,22 +12,27 @@
 			<textarea v-model="text" placeholder="请说一句话吧~" />
 		</view>
 		<!--图片选择-->
+		<upload-images @upload-img="uploadImages"></upload-images>
 		
 	</view>
 </template>
 
 <script>
-	import uniNavBar from "../../components/uni-nav-bar/uni-nav-bar.vue"
+	import uniNavBar from "../../components/uni-nav-bar/uni-nav-bar.vue";
+	import uploadImages from "../../components/common/upload-images.vue";
 	//定义选项
 	let privacys = ["所有人可见","仅自己可见"];
+
 	export default {
 		components:{
-			uniNavBar
+			uniNavBar,
+			uploadImages
 		},
 		data() {
 			return {
 				privacy:privacys[0],
-				text:""
+				text:"",
+				imageList:[]
 			}
 		},
 		methods: {
@@ -47,6 +52,11 @@
 						this.privacy = privacys[res.tapIndex];
 					}
 				});
+			},
+			uploadImages(arr){
+				console.log(JSON.stringify(arr));
+				this.imageList = arr;
+				console.log(this.imageList);
 			}
 		}
 	}
@@ -62,4 +72,5 @@
 	.uni-textarea{
 		border-bottom: 1px solid #EEEEEE;
 	}
+
 </style>
