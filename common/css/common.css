@@ -1,3 +1,22 @@
 /**
  * 公共的样式文件
  */
+.common-flex{
+	display: flex;
+}
+
+.common-flex-justify-center{
+	display: flex;
+	justify-content: center;
+}
+
+.common-flex-align-items{
+	display: flex;
+	align-items: center;
+}
+
+.common-flex-center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

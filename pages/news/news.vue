@@ -1,22 +1,189 @@
+<!-- 动态页面 -->
 <template>
 	<view>
-		动态
+		<!-- 顶部导航栏 -->
+		<news-nav-bar :tabBars="tabBars" :tabIndex="tabIndex" @change-tab="changeTab"></news-nav-bar>
+		<!-- 列表 -->
+		<view class="uni-tab-bar">
+			<!-- 横向滚动 -->
+			<swiper class="swiper-box" v-bind:style="{height:scrollHeight+'px'}" :current="tabIndex" @change="swiperChange">
+				<!-- 关注子页面 -->
+				<swiper-item>
+					<scroll-view scroll-y class="list" v-on:scrolltolower="loadMore()">
+						<template v-if="guanzhu.list.length>0">
+						 <block v-for="(item,index) in guanzhu.list" :key="index">
+						 	<common-list :item="item" :index="index"></common-list>
+						 </block>
+						 <!-- 上拉加载 -->
+						 <load-more v-bind:loadText="guanzhu.loadText"></load-more>
+						 </template>
+						 <template v-else>
+							 <no-thing></no-thing>
+						 </template>
+					</scroll-view>
+				</swiper-item>
+				<!-- 话题子页面 -->
+				<swiper-item>
+					<scroll-view scroll-y class="list">
+						 话题
+					</scroll-view>
+				</swiper-item>
+			</swiper>
+		</view>
+		
 	</view>
 </template>
 
 <script>
+	import newsNavBar from '../../components/news/news-nav-bar.vue';
+	import commonList from "../../components/common/common-list.vue";
+	import loadMore from "../../components/common/load-more.vue";
+	import noThing from "../../components/common/no-thing.vue";
+	let itemObj = {
+		userpic:"../../static/demo/userpic/8.jpg",
+		username:"三鱼先生",
+		sex:0,
+		age:25,
+		isguanzhu:false,
+		title:"六道快手家常菜,好吃又下饭,家人都喜欢,哈哈哈哈哈哈哈哈",
+		titlepic:"../../static/demo/datapic/16.jpg",
+		video:false,
+		share:false,
+		path:"深圳 龙岗",
+		sharenum:20,
+		commentnum:30,
+		goodnum:20
+	};
 	export default {
+		components: {
+			newsNavBar,
+			commonList,
+			loadMore,
+			noThing
+		},
 		data() {
 			return {
-				
+				scrollHeight:700,//滚动区域的高度
+				tabIndex:0,
+				tabBars:[
+					{name:"关注",id:0},
+					{name:"话题",id:1}
+				],
+				guanzhu:{
+					loadText:"上拉加载更多···",
+					list:[
+						//文字条目
+						{
+							userpic:"../../static/demo/userpic/8.jpg",
+							username:"三鱼先生",
+							sex:0,
+							age:25,
+							isguanzhu:false,
+							title:"六道快手家常菜,好吃又下饭,家人都喜欢,哈哈哈哈哈哈哈哈",
+							titlepic:"",
+							video:false,
+							share:false,
+							path:"深圳 龙岗",
+							sharenum:20,
+							commentnum:30,
+							goodnum:20
+						},
+						//图文条目
+						{
+							userpic:"../../static/demo/userpic/8.jpg",
+							username:"三鱼先生",
+							sex:0,
+							age:25,
+							isguanzhu:false,
+							title:"六道快手家常菜,好吃又下饭,家人都喜欢,哈哈哈哈哈哈哈哈",
+							titlepic:"../../static/demo/datapic/16.jpg",
+							video:false,
+							share:false,
+							path:"深圳 龙岗",
+							sharenum:20,
+							commentnum:30,
+							goodnum:20
+						},
+						//视频条目
+						{
+							userpic:"../../static/demo/userpic/8.jpg",
+							username:"三鱼先生",
+							sex:0,
+							age:25,
+							isguanzhu:false,
+							title:"六道快手家常菜,好吃又下饭,家人都喜欢,哈哈哈哈哈哈哈哈",
+							titlepic:"../../static/demo/datapic/16.jpg",
+							video:{
+								looknum:"25w",
+								long:"2:24"
+							},
+							share:false,
+							path:"深圳 龙岗",
+							sharenum:20,
+							commentnum:30,
+							goodnum:20
+						},
+						//分享条目
+						{
+							userpic:"../../static/demo/userpic/8.jpg",
+							username:"三鱼先生",
+							sex:0,
+							age:25,
+							isguanzhu:false,
+							title:"六道快手家常菜,好吃又下饭,家人都喜欢,哈哈哈哈哈哈哈哈",
+							titlepic:"",
+							video:false,
+							share:{
+								title:"分享的标题",
+								titlepic:"../../static/demo/datapic/10.jpg"
+							},
+							path:"深圳 龙岗",
+							sharenum:20,
+							commentnum:30,
+							goodnum:20
+						}
+					]
+				}
 			}
 		},
+		onLoad() {
+			uni.getSystemInfo({
+				success: (res) => {
+					let height = res.windowHeight;
+					//可视区域高度减去顶部标题栏高度
+					this.scrollHeight = height - uni.upx2px(100);
+				}
+			})
+		},
 		methods: {
-			
+			changeTab(index){
+				this.tabIndex = index;
+				console.log("切换条目:"+index);
+			},
+			swiperChange(event){
+				let currentIndex = event.detail.current;
+				this.tabIndex = currentIndex;
+			},
+			loadMore(){
+				//判断状态
+				if (this.guanzhu.loadText != "上拉加载更多···") {
+					return;
+				}
+				//模拟获取到了数据
+				this.guanzhu.loadText = "加载中···";
+				setTimeout(() => {
+					this.guanzhu.list.push(itemObj);
+					//还原状态
+					this.guanzhu.loadText = "上拉加载更多···";
+				}, 1000);
+				//this.guanzhu.loadText = "没有更多数据了";
+			}
 		}
 	}
 </script>
 
 <style>
+
+
 
 </style>

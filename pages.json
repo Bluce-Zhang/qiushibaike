@@ -6,7 +6,7 @@
 				"navigationBarTitleText": "首页",
 				"app-plus":{
 					"scrollIndicator":"none",
-					//"bounce":"none",	//关闭滑动到顶部或者底部的反弹效果
+					"bounce":"none",	//关闭滑动到顶部或者底部的反弹效果
 					"titleNView":{
 						"backgroundColor":"#FFFFFF",
 						"searchInput":{
@@ -47,7 +47,11 @@
         ,{
             "path" : "pages/news/news",
             "style" : {
-				"navigationBarTitleText": "动态"
+				"navigationBarTitleText": "动态",
+				"app-plus":{
+					"titleNView":false,
+					"bounce":"none"    //关闭滑动到顶部或者底部的反弹效果
+				}
 			}
         }
         ,{
