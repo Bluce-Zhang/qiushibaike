@@ -25,7 +25,34 @@
 				<!-- 话题子页面 -->
 				<swiper-item>
 					<scroll-view scroll-y class="list">
-						 话题
+						<!-- 搜索输入框 -->
+						<view class="search-input">
+							<input type="text" placeholder-class="icon iconfont icon-sousuo search-input-placeholder" placeholder="请输入搜索内容" />
+						</view>
+						<!-- 轮播图组件 -->
+						<view class="tipic-swiper animated bounceInDown">
+							<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
+								<block v-for="(item,index) in topic.swiper" :key="index">
+									<swiper-item>
+										<view class="swiper-item">
+											<image :src="item.src" mode="widthFix" lazy-load></image>
+										</view>
+									</swiper-item>
+								</block>
+							</swiper>
+						</view>
+						<!-- 热门分类 -->
+						<topic-nav :nav="topic.nav"></topic-nav>
+						<!-- 最近更新列表 -->
+						<view class="topic-list">
+							<view>
+								最近更新
+							</view>
+							<block v-for="(item,index) in topic.list" :key="index">
+								<topic-list-item :item="item"></topic-list-item>
+							</block>
+						</view>
+						
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -39,6 +66,8 @@
 	import commonList from "../../components/common/common-list.vue";
 	import loadMore from "../../components/common/load-more.vue";
 	import noThing from "../../components/common/no-thing.vue";
+	import topicNav from "../../components/news/topic-nav.vue";
+	import topicListItem from '../../components/news/topic-list-item.vue';
 	let itemObj = {
 		userpic:"../../static/demo/userpic/8.jpg",
 		username:"三鱼先生",
@@ -59,7 +88,9 @@
 			newsNavBar,
 			commonList,
 			loadMore,
-			noThing
+			noThing,
+			topicNav,
+			topicListItem
 		},
 		data() {
 			return {
@@ -143,6 +174,50 @@
 							goodnum:20
 						}
 					]
+				},
+				topic:{
+					swiper:[	//轮播图
+						{
+							src:"../../static/demo/datapic/16.jpg"
+						},
+						{
+							src:"../../static/demo/datapic/16.jpg"
+						},
+						{
+							src:"../../static/demo/datapic/16.jpg"
+						}
+					],
+					nav:[
+						{name:"最新"},
+						{name:"游戏"},
+						{name:"情感"},
+						{name:"打卡"},
+						{name:"故事"},
+						{name:"喜爱"}
+					],
+					list:[
+						{
+							title:"淘宝记录簿",
+							titlepic:"../../static/demo/topicpic/13.jpeg",
+							desc:"120斤到85斤 我的反转人生",
+							totalnum:20,
+							todaynum:15
+						},
+						{
+							title:"淘宝记录簿",
+							titlepic:"../../static/demo/topicpic/13.jpeg",
+							desc:"120斤到85斤 我的反转人生",
+							totalnum:20,
+							todaynum:15
+						},
+						{
+							title:"淘宝记录簿",
+							titlepic:"../../static/demo/topicpic/13.jpeg",
+							desc:"120斤到85斤 我的反转人生",
+							totalnum:20,
+							todaynum:15
+						}
+					]
 				}
 			}
 		},
@@ -183,7 +258,43 @@
 </script>
 
 <style>
-
-
+	/**
+	 * 搜索框样式
+	 */
+	.search-input{
+		padding: 20rpx;
+	}
+	
+	.search-input>input{
+		padding: 20rpx 15rpx;
+		border-radius: 15rpx;
+		background-color: #F4F4F4;
+	}
+	
+	.search-input-placeholder{
+		text-align: center;
+	}
+	
+	/**
+	 * 轮播组图样式
+	 */
+	.tipic-swiper{
+		padding: 0rpx 20rpx 20rpx 20rpx;
+	}
+	
+	.swiper-item image{
+		width: 100%;
+		border-radius: 20rpx;
+	}
+	
+	/**
+	 * 最新更新列表样式
+	 */
+	.topic-list{
+		padding: 20rpx 20rpx;
+	}
+	.topic-list>view:first-child{
+		margin-bottom: 40rpx;
+	}
 
 </style>
