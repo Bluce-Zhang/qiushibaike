@@ -46,7 +46,7 @@
 							titlepic:"../../static/demo/banner1.jpg",
 							playnum:200000,
 							long:"2:47",
-							infonum:{
+							infonum:{ 
 								index:0, //0:没有顶,没有踩 1:顶  2:踩
 								dingnum:8,
 								cainum:8
