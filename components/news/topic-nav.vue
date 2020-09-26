@@ -4,7 +4,7 @@
 		<!-- 第一行 -->
 		<view class="common-flex">
 			<view>热门分类</view>
-			<view class="common-flex-center more">
+			<view class="common-flex-center more" @click="openMore()">
 				<view>更多</view>
 				<view class="icon iconfont icon-jinru"></view>
 			</view>
@@ -12,7 +12,7 @@
 		<!-- 第二行 -->
 		<view class="common-flex-center">
 			<block v-for="(item,index) in nav" :key="index">
-				<view class="animated fadeInLeft">{{item.name}}</view>
+				<view class="animated fadeInLeft" @click="openDeail(item)">{{item.name}}</view>
 			</block>
 		</view>
 	</view>
@@ -22,6 +22,17 @@
 	export default {
 		props:{
 			nav:Array
+		},
+		methods:{
+			openMore(){
+				console.log("更多");
+				uni.navigateTo({
+					url:"../../pages/topic-nav/topic-nav"
+				})
+			},
+			openDeail(item){
+				console.log("打开话题分类页面");
+			}
 		}
 	}
 </script>

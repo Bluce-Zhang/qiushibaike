@@ -1,6 +1,6 @@
 <!-- 话题页面 话题列表条目 -->
 <template>
-	<view class="topic-list-item common-flex">
+	<view class="topic-list-item common-flex" @click="open()">
 		<image :src="item.titlepic" mode="widthFix" lazy-load></image>
 		<view class="info">
 			<view>#{{item.title}}#</view>
@@ -14,6 +14,13 @@
 	export default {
 		props:{
 			item:Object
+		},
+		methods:{
+			open(){
+				uni.navigateTo({
+					url: '../../pages/topic-detail/topic-detail?detail='+JSON.stringify(this.item)
+				});
+			}
 		}
 	}
 </script>
