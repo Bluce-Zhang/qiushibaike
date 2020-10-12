@@ -29,6 +29,9 @@
 			</view>
 		</template>
 		
+		<!-- 上拉加载 -->
+		<load-more :loadText="loadText"></load-more>
+		
 		
 	</view>
 </template>
@@ -38,6 +41,7 @@
 	import topicInfo from '@/components/topic-detail/topic-info.vue';
 	import commonList from '@/components/common/common-list.vue';
 	import noThing from '@/components/common/no-thing.vue';
+	import loadMore from '@/components/common/load-more.vue';
 	
 	
 	let itemObj = {
@@ -60,7 +64,8 @@
 		components: {
 			topicInfo,
 			commonList,
-			noThing
+			noThing,
+			loadMore
 		},
 		data() {
 			return {
@@ -80,7 +85,9 @@
 					}
 				],
 				list1:[],
+				loadText1:"上拉加载更多",
 				list2:[],
+				loadText2:"上拉加载更多",
 				tabindex:0,
 				tabBars:[
 					{
@@ -106,9 +113,34 @@
 			//this.list2.push(itemObj);
 			
 		},
+		//页面滚动触底事件
+		onReachBottom() {
+			console.log("上拉加载");
+			this.loadMore();
+		},
 		methods: {
 			changeTab(index){
 				this.tabindex = index;
+			},
+			//加载更多
+			loadMore(){
+				//记录当前位置
+				let index = this.tabindex;
+				//判断状态
+				if(this.loadText != '上拉加载更多'){
+					return;
+				}
+				
+				//设置为加载状态
+				this['loadText'+(index+1)] = '加载中..';
+				//加载数据
+				setTimeout(()=>{
+					this['list'+(index+1)] = this['list'+(index+1)].concat([itemObj]);
+					//改回状态
+					this['loadText'+(index+1)] = '上拉加载更多';
+				},2000);
+				
+				
 			}
 		},
 		computed: {
@@ -117,6 +149,13 @@
 					return this.list1;
 				}else{
 					return this.list2;
+				}
+			},
+			loadText(){
+				if(this.tabindex == 0){
+					return this.loadText1;
+				}else{
+					return this.loadText2;
 				}
 			}
 		},
