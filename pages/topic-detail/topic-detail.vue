@@ -43,8 +43,9 @@
 	import noThing from '@/components/common/no-thing.vue';
 	import loadMore from '@/components/common/load-more.vue';
 	
+	import ObjectUtil from '@/common/js/objectUtil.js';
 	
-	let itemObj = {
+	const itemObj = {
 		userpic:"../../static/demo/userpic/8.jpg",
 		username:"三鱼先生",
 		sex:0,
@@ -118,9 +119,25 @@
 			console.log("上拉加载");
 			this.loadMore();
 		},
+		//下拉刷新事件
+		onPullDownRefresh() {
+			console.log("下拉刷新");
+			this.getData();
+		},
 		methods: {
 			changeTab(index){
 				this.tabindex = index;
+			},
+			//下拉刷新获取数据
+			getData(){
+				let index = this.tabindex;
+				setTimeout(()=>{
+					let newItem = ObjectUtil.deepCopy(itemObj);
+					newItem.title = "下拉刷新的数据";
+					//添加数据
+					this['list'+(index+1)] = [newItem].concat(this['list'+(index+1)]);
+					uni.stopPullDownRefresh();
+				},2000);
 			},
 			//加载更多
 			loadMore(){
