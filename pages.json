@@ -58,6 +58,7 @@
             "path" : "pages/paper/paper",
             "style" : {
 				"navigationBarTitleText": "小纸条",
+				"enablePullDownRefresh":true,	//开启下拉刷新
 				"app-plus":{
 					"titleNView":{
 						"buttons":[
@@ -175,6 +176,66 @@
 					}
 				}
 			}
+        },
+        {
+            "path" : "pages/user-list/user-list",
+            "style" :{
+              
+              	"app-plus":{
+					"animationType":"slide-in-left",
+              		"scrollIndicator":"none",
+              		//"bounce":"none",	//关闭滑动到顶部或者底部的反弹效果
+              		"titleNView":{
+              			"autoBackButton":false,//隐藏返回按键
+              			"backgroundColor":"#FFFFFF",
+              			"searchInput":{
+              				"align":"left",
+              				"backgroundColor":"#F7F7F7",
+              				"borderRadius":"10px",
+              				"placeholder":"输入搜索好友",
+              				"placeholderColor":"#CCCCCC",
+              				"disabled":false
+              			},
+              			"buttons":[
+              				//右边编辑按钮
+              				{
+              					"color":"#000000",
+              					"colorPressed":"#BBBBBB",
+              					"fontSize":"30rpx",
+              					"float":"right",
+              					"text":"取消"
+              				}
+              			]
+              		}
+              	},
+              	"h5":{
+              		"scrollIndicator":"none",
+              		//"bounce":"none",	//关闭滑动到顶部或者底部的反弹效果
+              		"titleNView":{
+              			"backgroundColor":"#FFFFFF",
+              			"searchInput":{
+              				"align":"left",
+              				"backgroundColor":"#F7F7F7",
+              				"borderRadius":"10px",
+              				"placeholder":"输入搜索好友",
+              				"placeholderColor":"#CCCCCC",
+              				"disabled":false
+              			},
+              			"buttons":[
+              				//右边编辑按钮
+              				{
+              					"color":"#000000",
+              					"colorPressed":"#BBBBBB",
+              					"fontSize":"30rpx",
+              					"float":"right",
+              					"text":"取消"
+              				}
+              			]
+              		}
+              	}
+              
+            }
+            
         }
     ],
 	"globalStyle": {

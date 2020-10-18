@@ -1,10 +1,14 @@
 <!-- 顶部滚动导航栏组件 -->
 <template>
 	<view class="uni-tab-bar">
-		<scroll-view class="uni-swiper-tab" scroll-x>
+		<scroll-view class="uni-swiper-tab" scroll-x :style="scrollStyle">
 			<block v-for="(item,index) in tabbars" v-bind:key="index">
-				<view class="swiper-tab-list" v-bind:class="{'active':(index==tabIndex)}" v-on:click="tabClick(index)">
-					{{item.name}}
+				<view class="swiper-tab-list" 
+				v-bind:class="{'active':(index==tabIndex)}" 
+				v-on:click="tabClick(index)"
+				:style="scrollItemStyle"
+				>
+					{{item.name}} {{item.num?item.num:''}}
 					<view class="swiper-tab-bottom"></view>
 				</view>
 			</block>
@@ -16,7 +20,12 @@
 	export default {
 		props:{
 			tabbars:Array,
-			tabIndex:Number
+			tabIndex:Number,
+			scrollStyle:{
+				type:String,
+				default:''	//默认值为空
+			},
+			scrollItemStyle:String
 		},
 		methods:{
 			tabClick(index){

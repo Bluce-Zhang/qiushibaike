@@ -1,6 +1,6 @@
 <template>
 	<!-- 小纸条列表 -->
-	<view class="paper-list">
+	<view class="paper-list animated fadeInLeft fast">
 		<!-- 头像 -->
 		<image class="head-image" mode="widthFix" :src="item.userpic" lazy-load></image>
 		<view class="content">
