@@ -1,6 +1,6 @@
 <template>
 	<!-- 小纸条列表 -->
-	<view class="paper-list animated fadeInLeft fast">
+	<view class="paper-list animated fadeInLeft fast" @tap="openDetail()">
 		<!-- 头像 -->
 		<image class="head-image" mode="widthFix" :src="item.userpic" lazy-load></image>
 		<view class="content">
@@ -32,6 +32,12 @@
 		methods:{
 			badgeClick(){
 				console.log("角标点击事件");
+			},
+			openDetail(){
+				//打开聊天页面
+				uni.navigateTo({
+					url:"../../pages/user-chat/user-chat"
+				})
 			}
 		}
 	}

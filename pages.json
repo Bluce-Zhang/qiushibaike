@@ -237,6 +237,48 @@
             }
             
         }
+        ,{
+            "path" : "pages/user-chat/user-chat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "聊天页",
+                "enablePullDownRefresh": false,
+				"app-plus":{
+					"titleNView":{
+						"buttons":[
+							//右边编辑按钮
+							{
+								"color":"#000000",
+								"colorPressed":"#BBBBBB",
+								"fontSize":"50rpx",
+								"float":"right",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue628"
+							}
+						]
+					}
+				},
+				"h5":{
+					"scrollIndicator":"none",
+					//"bounce":"none",	//关闭滑动到顶部或者底部的反弹效果
+					"titleNView":{
+						"backgroundColor":"#FFFFFF",
+						"buttons":[
+							//右边编辑按钮
+							{
+								"color":"#000000",
+								"colorPressed":"#BBBBBB",
+								"fontSize":"40rpx",
+								"float":"right",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue628"
+							}
+						]
+					}
+				}
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

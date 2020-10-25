@@ -12,7 +12,7 @@
 			<view class="common-flex">
 				<view class="common-flex-align-items name">
 					{{item.username}}
-					<view class="icon iconfont common-flex-center age-gender" :class="[item.sex == 0?'icon-nan':'icon-nv']">{{item.age}}</view>
+					<tag-sex-age :sex="item.sex" :age="item.age"></tag-sex-age>
 				</view>
 				
 				<view v-show="!isguanzhu" class="common-flex-center focus" @tap="guanzhu()">+关注</view>
@@ -53,7 +53,11 @@
 </template>
 
 <script>
+	import tagSexAge from '@/components/common/tag-sex-age.vue';
 	export default {
+		components:{
+			tagSexAge
+		},
 		props:{
 			item:Object,
 			index:Number
